@@ -78,6 +78,7 @@ class ApiController extends AbstractController
     #[Route('/user/{id<\d+>}', name: 'user_list', methods: ['GET'])]
     public function list(Request $request,int $id = null): Response
     {
+        $usersArray = array();
         if ($id) {
             $user = $this->userRepository->find($id);
             if (!$user) {
