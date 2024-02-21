@@ -61,7 +61,10 @@ class ApiController extends AbstractController
 
         $errors = $this->validator->validate($user);
         if (count($errors) > 0) {
-            return new Response((string) $errors, Response::HTTP_BAD_REQUEST);
+            foreach ($errors as $error) {
+                $message = $error->getMessage();
+                return new Response($message, Response::HTTP_BAD_REQUEST);
+            }
         }
 
         $saveUser = $this->userRepository->saveUser($this->doctrine, $user);
