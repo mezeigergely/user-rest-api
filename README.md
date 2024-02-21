@@ -1,7 +1,7 @@
 ## About User Rest Api
 You can store users in database via User Rest Api.
 - **POST - api/user/**
-example:
+- example:
   $client = new Client();
   $options = [
     'multipart' => [
