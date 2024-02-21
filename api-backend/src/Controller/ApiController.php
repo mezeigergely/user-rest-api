@@ -72,16 +72,15 @@ class ApiController extends AbstractController
         return new Response("Error!", Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
-    #[Route('/user/{id}', name: 'user_list', methods: ['GET'])]
+    #[Route('/user/{id<\d+>}', name: 'user_list', methods: ['GET'])]
     public function list(Request $request,int $id = null): Response
     {
-
         if ($id) {
             $user = $this->userRepository->find($id);
-            $usersArray = $this->getUserDataArray($user);
             if (!$user) {
                 return new Response("Invalid ID!", Response::HTTP_NOT_FOUND);
             }
+            $usersArray = $this->getUserDataArray($user);
         }else{
             $users = $this->userRepository->findAll();
             foreach($users as $user){
